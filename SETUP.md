@@ -65,19 +65,44 @@ git push -u origin main
 
 ### 3.1 Habilitar GitHub Pages
 
+⚠️ **IMPORTANTE**: Sigue estos pasos exactamente para evitar errores.
+
 1. Ve a tu repositorio en GitHub
 2. Click en **"Settings"** (Configuración)
 3. En el menú lateral, click en **"Pages"**
-4. En **"Source"** (Fuente), selecciona:
-   - **Source**: GitHub Actions
+4. En **"Build and deployment"** → **"Source"**:
+   - ✅ **Selecciona**: "GitHub Actions" (NO "Deploy from a branch")
+   - ❌ **NO selecciones**: "Deploy from a branch"
 5. **¡Listo!** GitHub Actions se encargará del despliegue automático
+
+**Nota**: El archivo `.nojekyll` ya está incluido para desactivar Jekyll.
 
 ### 3.2 Esperar el Despliegue
 
 1. Ve a la pestaña **"Actions"** de tu repositorio
-2. Deberías ver un workflow ejecutándose
-3. Espera a que aparezca un ✅ verde
+2. Deberías ver un workflow ejecutándose: "Deploy to GitHub Pages"
+3. Espera a que aparezca un ✅ verde (tarda 2-3 minutos)
 4. Tu sitio estará disponible en: `https://TU-USUARIO.github.io/0xnotes/`
+
+### 3.3 Si Tienes Errores de Jekyll
+
+Si ves errores relacionados con Jekyll en las Actions:
+
+1. **Verifica** que `.nojekyll` esté en la raíz del repositorio
+2. **Confirma** que en Settings → Pages → Source esté en "GitHub Actions"
+3. **Haz un nuevo commit** para disparar el workflow
+4. Lee `SOLUCIÓN-GITHUB-PAGES.md` para más detalles
+
+```bash
+# Verificar que .nojekyll exista
+ls -la | grep .nojekyll
+
+# Si no existe, créalo
+touch .nojekyll
+git add .nojekyll
+git commit -m "Fix: Agregado .nojekyll"
+git push origin main
+```
 
 ## ✏️ Cómo Agregar Nuevas Notas
 
