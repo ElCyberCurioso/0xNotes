@@ -1,4 +1,4 @@
-# 🔧 Herramientas
+# Herramientas
 
 ## Introducción
 

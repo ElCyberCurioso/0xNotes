@@ -1,4 +1,4 @@
-# 🌐 Web Security
+# Web Security
 
 ## Introducción
 

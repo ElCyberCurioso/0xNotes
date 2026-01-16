@@ -1,10 +1,10 @@
-# 📖 Guía de Uso
+# Guía de Uso
 
 ## ¿Qué es 0xNotes?
 
 0xNotes es una aplicación web estática para almacenar y organizar notas de ciberseguridad. Está construida con [Docsify](https://docsify.js.org/), un generador de documentación dinámico que renderiza archivos Markdown directamente en el navegador.
 
-## 🚀 Cómo agregar nuevas notas
+## Cómo agregar nuevas notas
 
 ### Paso 1: Crear el archivo Markdown
 
@@ -35,9 +35,9 @@ git commit -m "Agregada nota: Mi Nueva Nota"
 git push origin main
 ```
 
-¡Listo! GitHub Actions se encargará automáticamente de desplegar los cambios.
+Listo. GitHub Actions se encargará automáticamente de desplegar los cambios.
 
-## ✏️ Cómo editar notas existentes
+## Cómo editar notas existentes
 
 1. Abre el archivo `.md` que deseas editar
 2. Realiza los cambios necesarios
@@ -50,21 +50,93 @@ git commit -m "Actualizada nota: Mi Nota"
 git push origin main
 ```
 
-## 🗑️ Cómo borrar notas
+## Sistema de Borradores
+
+### ¿Qué es un borrador?
+
+Un borrador es una nota que todavía no está lista para publicarse. Las notas en borrador se almacenan en la carpeta `_drafts/` y no aparecerán en el sitio público, pero seguirán estando en el repositorio.
+
+### Crear un borrador
+
+1. Crea tu archivo markdown en la carpeta `_drafts/`:
+
+```bash
+# Crear nuevo borrador
+touch _drafts/mi-nueva-nota.md
+```
+
+2. Escribe tu contenido normalmente
+3. No agregues referencias en `_sidebar.md` (las notas en `_drafts/` están ocultas automáticamente)
+4. Commit y push:
+
+```bash
+git add _drafts/mi-nueva-nota.md
+git commit -m "Agregado borrador: Mi Nueva Nota"
+git push origin main
+```
+
+### Publicar un borrador
+
+Cuando tu nota esté lista para publicarse:
+
+1. Mueve el archivo de `_drafts/` a la carpeta correspondiente:
+
+```bash
+# Mover borrador a carpeta final
+move _drafts\mi-nueva-nota.md pentesting\mi-nueva-nota.md
+# O en Linux/Mac:
+# mv _drafts/mi-nueva-nota.md pentesting/mi-nueva-nota.md
+```
+
+2. Agrega la referencia en `_sidebar.md`:
+
+```markdown
+* Pentesting
+  * [Mi Nueva Nota](pentesting/mi-nueva-nota.md)
+```
+
+3. Commit y push:
+
+```bash
+git add pentesting/mi-nueva-nota.md _sidebar.md
+git commit -m "Publicada nota: Mi Nueva Nota"
+git push origin main
+```
+
+### Mover una nota publicada a borrador
+
+Si quieres ocultar temporalmente una nota publicada:
+
+1. Mueve el archivo a `_drafts/`:
+
+```bash
+move pentesting\nota-temporal.md _drafts\
+```
+
+2. Elimina la referencia de `_sidebar.md`
+3. Commit y push:
+
+```bash
+git add _drafts/nota-temporal.md _sidebar.md
+git commit -m "Movida nota a borrador: Nota Temporal"
+git push origin main
+```
+
+## Cómo borrar notas
 
 1. Elimina el archivo `.md` correspondiente
-2. Elimina la referencia en `_sidebar.md`
+2. Elimina la referencia en `_sidebar.md` (si estaba publicada)
 3. Commit y push:
 
 ```bash
 git rm pentesting/nota-obsoleta.md
-# Edita _sidebar.md para remover la referencia
+# Edita _sidebar.md para remover la referencia si es necesario
 git add _sidebar.md
 git commit -m "Eliminada nota obsoleta"
 git push origin main
 ```
 
-## 📝 Sintaxis Markdown soportada
+## Sintaxis Markdown soportada
 
 ### Encabezados
 ```markdown
@@ -132,7 +204,7 @@ Contenido del tab 2
 <!-- tabs:end -->
 ````
 
-## 🎨 Características especiales
+## Características especiales
 
 ### Búsqueda
 Usa la barra de búsqueda en la parte superior para encontrar contenido en todas tus notas.
@@ -157,7 +229,7 @@ graph TD;
 ```
 ````
 
-## 🔧 Desarrollo local
+## Desarrollo local
 
 Para probar tus cambios localmente antes de hacer push:
 
@@ -175,7 +247,7 @@ docsify serve
 
 Luego abre http://localhost:3000 en tu navegador.
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 0xnotes/
@@ -195,7 +267,7 @@ Luego abre http://localhost:3000 en tu navegador.
 └── recursos/            # Recursos adicionales
 ```
 
-## 🤔 Consejos
+## Consejos
 
 1. **Organización**: Mantén tus notas organizadas en carpetas por tema
 2. **Nombres descriptivos**: Usa nombres de archivo descriptivos y en minúsculas
@@ -203,7 +275,7 @@ Luego abre http://localhost:3000 en tu navegador.
 4. **Imágenes**: Guarda las imágenes en una carpeta `assets/` o `images/`
 5. **Commits frecuentes**: Haz commits pequeños y descriptivos
 
-## 🆘 Solución de problemas
+## Solución de problemas
 
 ### La página no se actualiza después del push
 - Espera 2-3 minutos para que GitHub Actions complete el despliegue

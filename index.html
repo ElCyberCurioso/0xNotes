@@ -694,7 +694,13 @@
         placeholder: 'Buscar en las notas...',
         noData: 'No se encontraron resultados',
         depth: 6,
-        hideOtherSidebarContent: false
+        hideOtherSidebarContent: false,
+        // Excluir borradores de la búsqueda
+        filter: function(array) {
+          return array.filter(function(item) {
+            return !item.slug || !item.slug.startsWith('_drafts/');
+          });
+        }
       },
       
       // Paginación
@@ -722,7 +728,37 @@
         theme: 'classic',
         tabComments: true,
         tabHeadings: true
-      }
+      },
+      
+      // Plugin personalizado para ocultar borradores
+      plugins: [
+        function(hook, vm) {
+          // Hook para filtrar borradores del sidebar
+          hook.doneEach(function() {
+            // Ocultar enlaces a borradores en el sidebar
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(function(link) {
+              const href = link.getAttribute('href');
+              if (href && href.includes('_drafts/')) {
+                const listItem = link.closest('li');
+                if (listItem) {
+                  listItem.style.display = 'none';
+                }
+              }
+            });
+          });
+          
+          // Hook para redirigir si alguien intenta acceder a un borrador directamente
+          hook.beforeEach(function(content, next) {
+            const route = vm.route.path;
+            if (route.includes('_drafts/')) {
+              next('# Acceso Denegado\n\nEsta nota está en modo borrador y no está disponible públicamente.');
+            } else {
+              next(content);
+            }
+          });
+        }
+      ]
     }
   </script>
   

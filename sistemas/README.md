@@ -1,4 +1,4 @@
-# 💻 Sistemas Operativos
+# Sistemas Operativos
 
 ## Introducción
 

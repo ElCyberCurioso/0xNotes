@@ -1,4 +1,4 @@
-# 📝 CTF Writeups
+# CTF Writeups
 
 ## Introducción
 
