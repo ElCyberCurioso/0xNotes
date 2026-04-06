@@ -8,7 +8,7 @@ Esta sección contiene guías y notas sobre las herramientas más comunes utiliz
 
 ### Reconocimiento y Enumeración
 - [Nmap](herramientas/nmap.md) - Escaneo de puertos y servicios
-- [Masscan](herramientas/masscan.md) - Escaneo masivo rápido
+- Masscan - Escaneo masivo rápido
 - theHarvester - OSINT
 - Amass - Enumeración de subdominios
 

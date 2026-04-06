@@ -121,9 +121,12 @@
       margin-top: 0;
     }
     
-    /* Títulos principales en sidebar */
+    /* ==================== SIDEBAR LEVELS ==================== */
+    
+    /* Nivel 1: Títulos principales y Enlaces Root (ej. PENTESTING, INICIO) */
     .sidebar-nav > ul > li > strong,
-    .sidebar-nav > ul > li > p {
+    .sidebar-nav > ul > li > p,
+    .sidebar-nav > ul > li > a {
       color: var(--light-green) !important;
       font-size: 16px !important;
       font-weight: 700 !important;
@@ -131,25 +134,116 @@
       letter-spacing: 1px;
       margin: 16px 0 8px 0;
       padding: 8px 15px;
-      border-left: 4px solid var(--light-green);
-      background-color: rgba(5, 150, 105, 0.08);
+      border-left: 4px solid var(--light-green) !important;
+      background-color: rgba(5, 150, 105, 0.08) !important;
+      display: block;
     }
     
-    .sidebar-nav li a {
+    /* Quitar hover o estilos genéricos a los enlaces de Nivel 1 para que parezcan headers */
+    .sidebar-nav > ul > li > a:hover {
+      text-decoration: none;
+    }
+
+    /* Nivel 2: Páginas (ej. Reconocimiento, Enumeración) */
+    .sidebar-nav > ul > li > ul > li > a {
       color: var(--light-text);
+      font-size: 15px;
       font-weight: 600;
+      padding-left: 5px; /* Espaciado normal */
       transition: all 0.2s ease;
+      display: block;
+      margin-bottom: 4px;
     }
     
-    .sidebar-nav li a:hover {
+    .sidebar-nav > ul > li > ul > li > a:hover {
       color: var(--light-green);
-      padding-left: 20px;
+      padding-left: 10px;
     }
     
-    .sidebar-nav li.active > a {
+    .sidebar-nav > ul > li > ul > li.active > a {
       color: var(--light-green);
       border-right: 3px solid var(--light-green);
       font-weight: 700;
+    }
+
+    /* ==================== NUMBERING COUNTERS ==================== */
+    /* Resets para cada nivel */
+    .sidebar-nav > ul { counter-reset: level1; }
+    .sidebar-nav > ul > li > ul { counter-reset: level2; }
+    .sidebar-nav > ul > li > ul > li > ul { counter-reset: level3; }
+    .sidebar-nav > ul > li > ul > li > ul > li > ul { counter-reset: level4; }
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > ul { counter-reset: level5; }
+
+    /* Incrementar en cada elemento li de su respectivo nivel */
+    .sidebar-nav > ul > li { counter-increment: level1; }
+    .sidebar-nav > ul > li > ul > li { counter-increment: level2; }
+    .sidebar-nav > ul > li > ul > li > ul > li { counter-increment: level3; }
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li { counter-increment: level4; }
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > ul > li { counter-increment: level5; }
+
+    /* Pintar los números de Categoría */
+    .sidebar-nav > ul > li > strong::before,
+    .sidebar-nav > ul > li > p::before,
+    .sidebar-nav > ul > li > a::before {
+      content: counter(level1) ". ";
+    }
+
+    /* Pequeño espacio para las Páginas (Nivel 2) */
+    .sidebar-nav > ul > li > ul > li > a::before {
+      content: counter(level1) "." counter(level2) ". ";
+      color: var(--light-green); 
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* Nivel 3 y subsiguientes: Subtitulos dentro de las páginas */
+    .sidebar-nav > ul > li > ul > li > ul > li > a,
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > a,
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+      font-size: 13.5px;
+      font-weight: 400; /* Texto regular, no negrita */
+      color: #64748b; /* Color tenue */
+      padding: 3px 0 3px 15px; /* Indentación */
+      display: block;
+    }
+    
+    .sidebar-nav > ul > li > ul > li > ul > li > a::before {
+      content: counter(level1) "." counter(level2) "." counter(level3) ". ";
+      color: var(--light-green);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    /* Nivel 4 (TOC h3) */
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > a {
+       padding-left: 25px; /* Más indentación */
+    }
+
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > a::before {
+      content: counter(level1) "." counter(level2) "." counter(level3) "." counter(level4) ". ";
+      color: var(--light-green);
+      font-weight: 500;
+      margin-right: 6px;
+    }
+
+    /* Nivel 5 (TOC h4) */
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > ul > li > a {
+       padding-left: 35px; /* Más indentación */
+       font-size: 13px;
+    }
+
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > ul > li > a::before {
+      content: counter(level1) "." counter(level2) "." counter(level3) "." counter(level4) "." counter(level5) ". ";
+      color: var(--light-green);
+      font-weight: 500;
+      margin-right: 6px;
+    }
+    
+    .sidebar-nav > ul > li > ul > li > ul > li > a:hover,
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > a:hover,
+    .sidebar-nav > ul > li > ul > li > ul > li > ul > li > ul > li > a:hover {
+      color: var(--light-green);
+      font-weight: 500;
     }
 
     /* Sidebar colapsable */
@@ -166,15 +260,16 @@
       overflow: hidden;
     }
 
-    .sidebar-nav > ul > li > strong,
-    .sidebar-nav > ul > li > p {
+    /* Sidebar colapsable - solo items con sub-lista */
+    .sidebar-nav > ul > li.collapsible > strong,
+    .sidebar-nav > ul > li.collapsible > p {
       cursor: pointer;
       position: relative;
       user-select: none;
     }
 
-    .sidebar-nav > ul > li > strong::after,
-    .sidebar-nav > ul > li > p::after {
+    .sidebar-nav > ul > li.collapsible > strong::after,
+    .sidebar-nav > ul > li.collapsible > p::after {
       content: '▼';
       position: absolute;
       right: 15px;
@@ -186,6 +281,34 @@
     .sidebar-nav > ul > li.collapsed > p::after {
       transform: rotate(-90deg);
     }
+
+    /* Items tipo link [Texto](url) con sub-lista: flecha en el <li> */
+    .sidebar-nav > ul > li.collapsible-link {
+      position: relative;
+      cursor: default;
+    }
+
+    .sidebar-nav > ul > li.collapsible-link::after {
+      content: '▼';
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 12px;
+      color: var(--light-green);
+      transition: transform 0.3s ease;
+      pointer-events: none; /* La zona de click es el <li>, no este pseudo-elemento */
+    }
+
+    .sidebar-nav > ul > li.collapsible-link.collapsed::after {
+      transform: rotate(-90deg);
+    }
+
+    /* Área de click para la flecha en items de link: zona derecha del <li> */
+    .sidebar-nav > ul > li.collapsible-link > a {
+      display: block;
+      padding-right: 36px; /* Dejar espacio para la flecha */
+    }
+
 
     /* ==================== CONTENIDO PRINCIPAL ==================== */
     .content {
@@ -503,8 +626,9 @@
     }
 
     /* Sidebar colapsable en modo oscuro */
-    body.dark-mode .sidebar-nav > ul > li > strong::after,
-    body.dark-mode .sidebar-nav > ul > li > p::after {
+    body.dark-mode .sidebar-nav > ul > li.collapsible > strong::after,
+    body.dark-mode .sidebar-nav > ul > li.collapsible > p::after,
+    body.dark-mode .sidebar-nav > ul > li.collapsible-link::after {
       color: var(--primary-green);
     }
 
@@ -890,14 +1014,6 @@
       }
     }
 
-    /* ==================== COVER PAGE ==================== */
-    .cover.show {
-      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-secondary) 100%);
-    }
-
-    .cover .cover-main {
-      color: var(--primary-green);
-    }
   </style>
 </head>
 <body class="dark-mode">
@@ -923,43 +1039,39 @@
   
   <script>
     // ==================== THEME TOGGLE LOGIC ====================
-    function toggleTheme() {
-      const body = document.body;
-      const moonIcon = document.getElementById('theme-icon-moon');
-      const sunIcon = document.getElementById('theme-icon-sun');
-      
-      if (body.classList.contains('dark-mode')) {
-        body.classList.remove('dark-mode');
-        moonIcon.style.display = 'block';
-        sunIcon.style.display = 'none';
-        localStorage.setItem('theme', 'light');
+    // Aplicar tema guardado INMEDIATAMENTE para evitar flash
+    (function() {
+      var savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
       } else {
-        body.classList.add('dark-mode');
-        moonIcon.style.display = 'none';
-        sunIcon.style.display = 'block';
-        localStorage.setItem('theme', 'dark');
+        document.body.classList.add('dark-mode');
+      }
+    })();
+
+    function _applyThemeIcons() {
+      var isDark = document.body.classList.contains('dark-mode');
+      var moonIcon = document.getElementById('theme-icon-moon');
+      var sunIcon = document.getElementById('theme-icon-sun');
+      if (moonIcon && sunIcon) {
+        moonIcon.style.display = isDark ? 'none' : 'block';
+        sunIcon.style.display = isDark ? 'block' : 'none';
       }
     }
 
-    // Cargar tema guardado al iniciar (modo oscuro por defecto)
-    document.addEventListener('DOMContentLoaded', function() {
-      const savedTheme = localStorage.getItem('theme');
-      const moonIcon = document.getElementById('theme-icon-moon');
-      const sunIcon = document.getElementById('theme-icon-sun');
-      
-      // Si el usuario explícitamente eligió modo claro, usarlo
-      // De lo contrario, usar modo oscuro por defecto
-      if (savedTheme === 'light') {
+    function toggleTheme() {
+      var isDark = document.body.classList.contains('dark-mode');
+      if (isDark) {
         document.body.classList.remove('dark-mode');
-        moonIcon.style.display = 'block';
-        sunIcon.style.display = 'none';
+        localStorage.setItem('theme', 'light');
       } else {
-        // Modo oscuro por defecto (si es null o 'dark')
         document.body.classList.add('dark-mode');
-        moonIcon.style.display = 'none';
-        sunIcon.style.display = 'block';
+        localStorage.setItem('theme', 'dark');
       }
-    });
+      _applyThemeIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', _applyThemeIcons);
 
     // Configuración de Docsify
     window.$docsify = {
@@ -1060,19 +1172,53 @@
             // Agregar funcionalidad de sidebar colapsable
             const sidebarItems = document.querySelectorAll('.sidebar-nav > ul > li');
             sidebarItems.forEach(function(item) {
-              const header = item.querySelector('strong, p');
-              const subList = item.querySelector('ul');
-              
+              // :scope > garantiza que solo buscamos hijos DIRECTOS, no descendientes
+              // Incluimos 'a' para items tipo [Inicio](/) donde no hay p ni strong
+              const header = item.querySelector(':scope > strong, :scope > p, :scope > a');
+              const subList = item.querySelector(':scope > ul');
+
               if (header && subList) {
-                // Remover listeners anteriores
-                header.replaceWith(header.cloneNode(true));
-                const newHeader = item.querySelector('strong, p');
+                // Marcar como colapsable
+                item.classList.add('collapsible');
                 
-                newHeader.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  item.classList.toggle('collapsed');
-                });
+                // Comprobar si este item o alguno de sus sub-items es el recurso actual activo
+                const hasActiveChild = item.querySelector('.active') !== null;
+                const isItemActive = item.classList.contains('active');
+                
+                if (hasActiveChild || isItemActive) {
+                  item.classList.remove('collapsed');
+                } else {
+                  // Si no estamos en él, lo colapsamos por defecto
+                  item.classList.add('collapsed');
+                }
+
+                // Para headers tipo <a>, usamos el <li> como zona de click colapsable
+                // Para headers tipo <p>/<strong>, usamos el propio header
+                const isLinkHeader = header.tagName === 'A';
+
+                if (isLinkHeader) {
+                  // Añadir clase especial para el estilo CSS del wrapper
+                  item.classList.add('collapsible-link');
+
+                  // Escuchar click en el <li> pero solo actuar si NO viene del <a>
+                  item.addEventListener('click', function handleItemClick(e) {
+                    if (e.target.closest('a')) return; // Dejar navegar
+                    e.preventDefault();
+                    e.stopPropagation();
+                    item.classList.toggle('collapsed');
+                  });
+                } else {
+                  // Remover listeners anteriores para evitar duplicados
+                  header.replaceWith(header.cloneNode(true));
+                  const newHeader = item.querySelector(':scope > strong, :scope > p');
+
+                  newHeader.addEventListener('click', function(e) {
+                    if (e.target.closest('a')) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    item.classList.toggle('collapsed');
+                  });
+                }
               }
             });
           });
@@ -1091,15 +1237,24 @@
     }
   </script>
   
+  <!-- Mermaid for diagrams -->
+  <!-- mermaid + docsify-mermaid MUST come before docsify core so the plugin
+       can register its hooks before Docsify initializes. -->
+  <script src="//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: false });
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-mermaid@2/dist/docsify-mermaid.js"></script>
+
   <!-- Docsify core -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  
-  <!-- Plugins -->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- Plugins (loaded after core) -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
-  
+
   <!-- Syntax highlighting -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
@@ -1108,13 +1263,5 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
-  
-  <!-- Mermaid for diagrams -->
-  <script type="module">
-    import mermaid from "//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({ startOnLoad: true });
-    window.mermaid = mermaid;
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-mermaid@2/dist/docsify-mermaid.js"></script>
 </body>
 </html>

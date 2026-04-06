@@ -37,6 +37,7 @@
   * [TryHackMe](ctf/tryhackme.md)
 
 * Recursos
+  * [Introducción](recursos/README.md)
   * [Cheatsheets](recursos/cheatsheets.md)
   * [Links Útiles](recursos/links.md)
   * [Certificaciones](recursos/certificaciones.md)
