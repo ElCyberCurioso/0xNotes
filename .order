@@ -1,0 +1,14 @@
+# Orden del sidebar raíz.
+# Solo los elementos listados aquí aparecen en el sidebar.
+# Añade nuevas carpetas o ficheros en la posición deseada.
+
+README.md
+guia-uso.md
+guia-crear-notas.md
+TEMPLATE.md
+pentesting
+web-security
+herramientas
+sistemas
+ctf
+recursos

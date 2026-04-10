@@ -1,0 +1,1080 @@
+/* =============================================================
+   0xNotes — Stylesheet
+   Stack: Docsify + custom theme (light/dark)
+   ============================================================= */
+
+/* ── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ── Design Tokens ───────────────────────────────────────── */
+:root {
+  /* Brand greens */
+  --green:        #059669;
+  --green-hover:  #047857;
+  --green-light:  #d1fae5;
+  --green-neon:   #00ff88;
+  --green-neon-2: #00cc6f;
+
+  /* Light mode surfaces */
+  --l-bg:       #ffffff;
+  --l-bg-2:     #f8fafc;
+  --l-bg-3:     #f1f5f9;
+  --l-text:     #0f172a;
+  --l-text-2:   #334155;
+  --l-text-3:   #64748b;
+  --l-border:   #e2e8f0;
+
+  /* Dark mode surfaces */
+  --d-bg:       #0d1117;
+  --d-bg-2:     #161b22;
+  --d-bg-3:     #1c2128;
+  --d-text:     #e6edf3;
+  --d-text-2:   #c9d1d9;
+  --d-text-3:   #8b949e;
+  --d-border:   #30363d;
+
+  /* Always-dark code block */
+  --code-bg:    #161b22;
+
+  /* Heading colors in dark mode */
+  --d-h2: #5eead4;
+  --d-h3: #86efac;
+  --d-h4: #a7f3d0;
+
+  /* Alert colors */
+  --alert-note-border:      #3b82f6;
+  --alert-note-bg:          rgba(59, 130, 246, 0.08);
+  --alert-tip-border:       #10b981;
+  --alert-tip-bg:           rgba(16, 185, 129, 0.08);
+  --alert-warning-border:   #f59e0b;
+  --alert-warning-bg:       rgba(245, 158, 11, 0.08);
+  --alert-important-border: #8b5cf6;
+  --alert-important-bg:     rgba(139, 92, 246, 0.08);
+  --alert-danger-border:    #ef4444;
+  --alert-danger-bg:        rgba(239, 68, 68, 0.08);
+
+  /* Syntax tokens */
+  --syn-comment:  #6a9955;
+  --syn-string:   #10b981;
+  --syn-keyword:  #6cb6ff;
+  --syn-fn:       #ffd580;
+  --syn-number:   #b5cea8;
+  --syn-property: #9cdcfe;
+  --syn-operator: #d4d4d4;
+  --syn-punct:    #c9d1d9;
+  --syn-bool:     #79c0ff;
+  --syn-class:    #ffa657;
+  --syn-tag:      #7ee787;
+  --syn-attr:     #79c0ff;
+  --syn-attrval:  #a5d6ff;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--l-bg);
+  color: var(--l-text);
+  transition: background 0.25s ease, color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar {
+  background: var(--l-bg-2);
+  border-right: 1px solid var(--l-border);
+  padding-top: 0;
+}
+
+/* Logo */
+.app-name-link {
+  display: flex !important;
+  align-items: center;
+  gap: 0;
+  padding: 24px 20px 20px !important;
+  text-decoration: none !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: var(--green) !important;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--l-border);
+  margin-bottom: 12px;
+}
+
+.app-name-link::before {
+  content: '> ';
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+.app-name-link::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Search box */
+.sidebar .search {
+  padding: 0 16px 12px;
+}
+
+.sidebar .search input {
+  border-radius: 8px;
+  border: 1px solid var(--l-border);
+  background: var(--l-bg);
+  color: var(--l-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  padding: 8px 12px;
+  transition: border-color 0.2s;
+}
+
+.sidebar .search input:focus {
+  border-color: var(--green);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+}
+
+.sidebar .search input::placeholder { color: var(--l-text-3); }
+
+/* Search results panel */
+.search .results-panel { background: var(--l-bg); }
+.matching-post { color: var(--l-text-2); }
+.matching-post strong { color: var(--green); }
+.search .no-data { color: var(--l-text-3); }
+
+/* Nav top-level items (section headers) */
+.sidebar-nav > ul { margin: 0; padding: 0 0 80px; }
+
+.sidebar-nav > ul > li {
+  list-style: none;
+  margin: 0;
+}
+
+/* Section labels: <strong> or plain <p> (no link child) */
+.sidebar-nav > ul > li > strong,
+.sidebar-nav > ul > li > p:not(.link-wrapper) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 4px;
+  margin: 12px 0 2px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--l-text-3) !important;
+}
+
+/* When Docsify wraps an active direct-link in <p> (class added by app.js) */
+.sidebar-nav > ul > li > p.link-wrapper {
+  padding: 0;
+  margin: 1px 8px;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: inherit !important;
+  background: none;
+}
+
+/* The <a> inside that wrapper */
+.sidebar-nav > ul > li > p.link-wrapper > a {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--green) !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  background: rgba(5, 150, 105, 0.1);
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-nav > ul > li > p.link-wrapper > a:hover {
+  background: rgba(5, 150, 105, 0.15);
+  color: var(--green-hover) !important;
+}
+
+/* Collapsible arrow */
+.sidebar-nav > ul > li.collapsible > strong,
+.sidebar-nav > ul > li.collapsible > p {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.sidebar-nav > ul > li.collapsible > strong::after,
+.sidebar-nav > ul > li.collapsible > p:not(.link-wrapper)::after {
+  content: '›';
+  position: absolute;
+  right: 16px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--l-text-3);
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.sidebar-nav > ul > li.collapsed > strong::after,
+.sidebar-nav > ul > li.collapsed > p:not(.link-wrapper)::after {
+  transform: rotate(0deg);
+}
+
+/* Collapsible sub-list — max-height set via JS (scrollHeight) so any length works */
+.sidebar-nav > ul > li > ul {
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  opacity: 1;
+}
+
+.sidebar-nav > ul > li.collapsed > ul {
+  max-height: 0 !important;
+  opacity: 0;
+}
+
+/* Top-level links (e.g. Inicio, Guía) */
+.sidebar-nav > ul > li > a {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--l-text-2) !important;
+  text-decoration: none !important;
+  border-radius: 6px;
+  margin: 1px 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-nav > ul > li > a:hover {
+  background: var(--l-bg-3);
+  color: var(--green) !important;
+}
+
+.sidebar-nav > ul > li.active > a,
+.sidebar-nav > ul > li > a.active {
+  background: rgba(5, 150, 105, 0.1);
+  color: var(--green) !important;
+  font-weight: 600;
+}
+
+/* Level-2 links (pages within sections) */
+.sidebar-nav > ul > li > ul > li { list-style: none; }
+
+.sidebar-nav > ul > li > ul > li > a {
+  display: flex;
+  align-items: center;
+  padding: 6px 16px 6px 26px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--l-text) !important;    /* #0f172a — clearly readable */
+  text-decoration: none !important;
+  border-radius: 6px;
+  margin: 1px 8px;
+  transition: background 0.15s, color 0.15s;
+  position: relative;
+}
+
+.sidebar-nav > ul > li > ul > li > a::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--l-border);
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background 0.15s;
+}
+
+.sidebar-nav > ul > li > ul > li > a:hover,
+.sidebar-nav > ul > li > ul > li > a:hover::before {
+  color: var(--green) !important;
+  background: var(--l-bg-3);
+}
+
+.sidebar-nav > ul > li > ul > li > a:hover::before {
+  background: var(--green);
+}
+
+.sidebar-nav > ul > li > ul > li.active > a {
+  color: var(--green) !important;
+  font-weight: 600;
+  background: rgba(5, 150, 105, 0.08);
+}
+
+.sidebar-nav > ul > li > ul > li.active > a::before {
+  background: var(--green);
+}
+
+/* Level-3+ links (TOC headings) */
+.sidebar-nav > ul > li > ul > li > ul > li > a,
+.sidebar-nav > ul > li > ul > li > ul > li > ul > li > a {
+  display: block;
+  padding: 4px 16px 4px 38px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--l-text-3) !important;
+  text-decoration: none !important;
+  transition: color 0.15s;
+}
+
+.sidebar-nav > ul > li > ul > li > ul > li > a:hover,
+.sidebar-nav > ul > li > ul > li > ul > li > ul > li > a:hover {
+  color: var(--green) !important;
+}
+
+/* TOC sub-items that Docsify injects under an active direct link */
+.sidebar-nav > ul > li > ul > li > ul > li > a {
+  display: block;
+  padding: 4px 16px 4px 36px;
+  font-size: 12.5px;
+  color: var(--l-text-3) !important;
+  text-decoration: none !important;
+  transition: color 0.15s;
+  border-radius: 4px;
+  margin: 1px 8px;
+}
+
+.sidebar-nav > ul > li > ul > li > ul > li > a:hover {
+  color: var(--green) !important;
+  background: var(--l-bg-3);
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+  background: var(--l-bg-2) !important;
+  border-color: var(--l-border) !important;
+}
+
+.sidebar-toggle span { background: var(--green) !important; }
+
+/* ── Main Content ─────────────────────────────────────────── */
+.content { background: var(--l-bg); }
+
+.markdown-section {
+  color: var(--l-text);
+  max-width: 860px;
+  padding: 40px 48px;
+  line-height: 1.75;
+  font-size: 15.5px;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Light mode heading hierarchy — clear visual steps */
+.markdown-section h1 {
+  font-size: 2rem;
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
+  padding-bottom: 12px;
+  margin-top: 0;
+}
+
+.markdown-section h2 {
+  font-size: 1.4rem;
+  color: var(--l-text);
+  border-bottom: 1px solid var(--l-border);
+  padding-bottom: 8px;
+  /* green accent bar — clear section anchor */
+  border-left: 3px solid var(--green);
+  padding-left: 12px;
+}
+
+.markdown-section h3 {
+  font-size: 1.15rem;
+  color: var(--l-text-2);
+  border-left: 2px solid var(--l-border);
+  padding-left: 10px;
+}
+
+.markdown-section h4 {
+  font-size: 1rem;
+  color: var(--l-text-3);
+  font-weight: 600;
+}
+
+.markdown-section h5,
+.markdown-section h6 {
+  font-size: 0.95rem;
+  color: var(--l-text-3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Body text */
+.markdown-section p  { margin: 0.75em 0; color: var(--l-text); }
+.markdown-section li { margin: 0.25em 0; color: var(--l-text); }
+
+/* Strong / em — override vue.css dark default */
+.markdown-section strong,
+.markdown-section b {
+  color: var(--l-text) !important;
+  font-weight: 700;
+}
+
+.markdown-section em,
+.markdown-section i {
+  color: var(--l-text-2);
+}
+
+.markdown-section ul,
+.markdown-section ol {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+
+/* ── Links ───────────────────────────────────────────────── */
+.markdown-section a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.markdown-section a:hover {
+  color: var(--green-hover);
+  border-bottom-color: var(--green-hover);
+}
+
+.markdown-section h1 a,
+.markdown-section h2 a,
+.markdown-section h3 a { border-bottom: none; }
+
+/* Heading anchors — inherit heading color, suppress link hover effects */
+.markdown-section h1 .anchor,
+.markdown-section h2 .anchor,
+.markdown-section h3 .anchor,
+.markdown-section h4 .anchor,
+.markdown-section h5 .anchor,
+.markdown-section h6 .anchor,
+.markdown-section h1 .anchor span,
+.markdown-section h2 .anchor span,
+.markdown-section h3 .anchor span,
+.markdown-section h4 .anchor span,
+.markdown-section h5 .anchor span,
+.markdown-section h6 .anchor span,
+.markdown-section h1 .anchor:hover span,
+.markdown-section h2 .anchor:hover span,
+.markdown-section h3 .anchor:hover span,
+.markdown-section h4 .anchor:hover span,
+.markdown-section h5 .anchor:hover span,
+.markdown-section h6 .anchor:hover span {
+  color: inherit !important;
+  border-bottom: none !important;
+  background: transparent !important;
+  text-decoration: none !important;
+}
+
+/* ── Inline Code ─────────────────────────────────────────── */
+.markdown-section code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875em;
+  background: var(--l-bg-3);
+  color: var(--green);
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid var(--l-border);
+}
+
+/* ── Code Blocks ─────────────────────────────────────────── */
+.markdown-section pre {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--code-bg) !important;
+  border-radius: 10px;
+  padding: 20px 24px !important;
+  margin: 1.25em 0;
+  border: 1px solid #30363d;
+  border-left: 3px solid var(--green);
+  overflow-x: auto;
+  position: relative;
+}
+
+.markdown-section pre > code {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.88em !important;
+  line-height: 1.65;
+  background: transparent !important;
+  color: #e6edf3 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Copy button */
+.docsify-copy-code-button {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: var(--green) !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+  padding: 3px 10px !important;
+  transition: background 0.2s !important;
+}
+
+.docsify-copy-code-button:hover {
+  background: var(--green-hover) !important;
+}
+
+/* Syntax tokens (always shown on dark bg) */
+.token.comment             { color: #6a9955; font-style: italic; }
+.token.string              { color: #7ee787; }
+.token.keyword             { color: #6cb6ff; font-weight: 600; }
+.token.function            { color: #ffd580; }
+.token.number              { color: #b5cea8; }
+.token.property            { color: #9cdcfe; }
+.token.operator,
+.token.punctuation         { color: #c9d1d9; }
+.token.boolean,
+.token.constant            { color: #79c0ff; }
+.token.class-name          { color: #ffa657; }
+.token.tag                 { color: #7ee787; }
+.token.attr-name           { color: #79c0ff; }
+.token.attr-value          { color: #a5d6ff; }
+.token.regex               { color: #ffb86c; }
+.token.important           { color: #ff7b72; font-weight: bold; }
+
+/* ── Tables ──────────────────────────────────────────────── */
+.markdown-section table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+  font-size: 14.5px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--l-border);
+}
+
+.markdown-section thead { background: var(--l-bg-3); }
+
+.markdown-section th {
+  padding: 11px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--l-text-2);
+  border-bottom: 2px solid var(--l-border);
+}
+
+.markdown-section td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--l-border);
+  color: var(--l-text-2);
+}
+
+.markdown-section tbody tr:last-child td { border-bottom: none; }
+
+.markdown-section tbody tr { background-color: var(--l-bg) !important; }
+
+.markdown-section tbody tr:nth-child(even) {
+  background-color: var(--l-bg-2) !important;
+}
+
+.markdown-section tbody tr:hover {
+  background-color: var(--l-bg-3) !important;
+}
+
+.markdown-section td { background-color: inherit !important; }
+
+/* ── Blockquotes & Alerts ────────────────────────────────── */
+.markdown-section blockquote {
+  border-left: 3px solid var(--green);
+  background: var(--l-bg-2);
+  padding: 14px 20px;
+  margin: 1.25em 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--l-text-2);
+}
+
+.markdown-section blockquote p { margin: 0.3em 0; }
+.markdown-section blockquote p:first-child { margin-top: 0; }
+.markdown-section blockquote p:last-child  { margin-bottom: 0; }
+
+.markdown-section blockquote strong { color: var(--green); }
+
+/* Alert variants */
+.markdown-section blockquote.alert-note {
+  border-left-color: var(--alert-note-border);
+  background: var(--alert-note-bg);
+}
+.markdown-section blockquote.alert-note p:first-child strong {
+  color: var(--alert-note-border);
+}
+
+.markdown-section blockquote.alert-tip {
+  border-left-color: var(--alert-tip-border);
+  background: var(--alert-tip-bg);
+}
+.markdown-section blockquote.alert-tip p:first-child strong {
+  color: var(--alert-tip-border);
+}
+
+.markdown-section blockquote.alert-warning {
+  border-left-color: var(--alert-warning-border);
+  background: var(--alert-warning-bg);
+}
+.markdown-section blockquote.alert-warning p:first-child strong {
+  color: var(--alert-warning-border);
+}
+
+.markdown-section blockquote.alert-important {
+  border-left-color: var(--alert-important-border);
+  background: var(--alert-important-bg);
+}
+.markdown-section blockquote.alert-important p:first-child strong {
+  color: var(--alert-important-border);
+}
+
+.markdown-section blockquote.alert-caution,
+.markdown-section blockquote.alert-danger {
+  border-left-color: var(--alert-danger-border);
+  background: var(--alert-danger-bg);
+}
+.markdown-section blockquote.alert-caution p:first-child strong,
+.markdown-section blockquote.alert-danger p:first-child strong {
+  color: var(--alert-danger-border);
+}
+
+/* ── Theme Toggle Button ─────────────────────────────────── */
+.theme-toggle {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  background: var(--green);
+  box-shadow: 0 2px 12px rgba(5, 150, 105, 0.35);
+  transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--green-hover);
+  transform: scale(1.08);
+  box-shadow: 0 4px 18px rgba(5, 150, 105, 0.5);
+}
+
+.theme-toggle:active { transform: scale(0.95); }
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  fill: currentColor;
+  stroke: currentColor;
+  transition: color 0.2s;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--l-bg-2); }
+::-webkit-scrollbar-thumb {
+  background: var(--l-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+/* ── Pagination ──────────────────────────────────────────── */
+.pagination-item a {
+  color: var(--green) !important;
+  font-weight: 600;
+}
+
+/* ── Navbar ──────────────────────────────────────────────── */
+.app-nav {
+  background: var(--l-bg);
+  border-bottom: 1px solid var(--l-border);
+}
+
+.app-nav a {
+  color: var(--l-text-2);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.app-nav a:hover { color: var(--green); }
+
+/* ── Animations ──────────────────────────────────────────── */
+#app { animation: fadeIn 0.4s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .markdown-section { padding: 24px 20px; }
+
+  .theme-toggle {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Base ────────────────────────────────────────────────── */
+body.dark-mode {
+  background: var(--d-bg);
+  color: var(--d-text);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+body.dark-mode .sidebar {
+  background: var(--d-bg-2);
+  border-right-color: var(--d-border);
+}
+
+body.dark-mode .app-name-link {
+  color: var(--green-neon) !important;
+  border-bottom-color: var(--d-border);
+}
+
+body.dark-mode .sidebar .search input {
+  background: var(--d-bg-3);
+  color: var(--d-text);
+  border-color: var(--d-border);
+}
+
+body.dark-mode .sidebar .search input:focus {
+  border-color: var(--green-neon);
+  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+body.dark-mode .sidebar .search input::placeholder {
+  color: var(--d-text-3);
+}
+
+body.dark-mode .search .results-panel {
+  background: var(--d-bg-2);
+  color: var(--d-text-2);
+}
+
+body.dark-mode .matching-post {
+  color: var(--d-text-2);
+  background: var(--d-bg-3);
+  border-bottom-color: var(--d-border);
+}
+
+body.dark-mode .matching-post:hover { background: var(--d-bg); }
+body.dark-mode .matching-post strong { color: var(--green-neon); }
+body.dark-mode .matching-post p,
+body.dark-mode .matching-post span   { color: var(--d-text-2); }
+body.dark-mode .matching-post h1,
+body.dark-mode .matching-post h2,
+body.dark-mode .matching-post h3,
+body.dark-mode .matching-post h4,
+body.dark-mode .matching-post a      { color: var(--d-text); }
+body.dark-mode .search .no-data      { color: var(--d-text-3); }
+body.dark-mode .search .clear-button { color: var(--d-text); }
+body.dark-mode .search .clear-button:hover { color: var(--green-neon); }
+
+/* Section labels */
+body.dark-mode .sidebar-nav > ul > li > strong,
+body.dark-mode .sidebar-nav > ul > li > p:not(.link-wrapper) {
+  color: var(--d-text-3) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li > strong::after,
+body.dark-mode .sidebar-nav > ul > li > p:not(.link-wrapper)::after {
+  color: var(--d-text-3);
+}
+
+/* Active link wrapper in dark mode */
+body.dark-mode .sidebar-nav > ul > li > p.link-wrapper {
+  background: none;
+}
+
+body.dark-mode .sidebar-nav > ul > li > p.link-wrapper > a {
+  color: var(--green-neon) !important;
+  background: rgba(0, 255, 136, 0.08);
+}
+
+body.dark-mode .sidebar-nav > ul > li > p.link-wrapper > a:hover {
+  background: rgba(0, 255, 136, 0.12);
+  color: var(--green-neon-2) !important;
+}
+
+/* Top-level nav links */
+body.dark-mode .sidebar-nav > ul > li > a {
+  color: var(--d-text-2) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li > a:hover {
+  background: var(--d-bg-3);
+  color: var(--green-neon) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li.active > a {
+  background: rgba(0, 255, 136, 0.08);
+  color: var(--green-neon) !important;
+}
+
+/* Level-2 links */
+body.dark-mode .sidebar-nav > ul > li > ul > li > a {
+  color: var(--d-text-2) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li > ul > li > a::before {
+  background: var(--d-border);
+}
+
+body.dark-mode .sidebar-nav > ul > li > ul > li > a:hover {
+  background: var(--d-bg-3);
+  color: var(--green-neon) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li > ul > li > a:hover::before,
+body.dark-mode .sidebar-nav > ul > li > ul > li.active > a::before {
+  background: var(--green-neon);
+}
+
+body.dark-mode .sidebar-nav > ul > li > ul > li.active > a {
+  color: var(--green-neon) !important;
+  background: rgba(0, 255, 136, 0.06);
+}
+
+/* Level 3+ */
+body.dark-mode .sidebar-nav > ul > li > ul > li > ul > li > a,
+body.dark-mode .sidebar-nav > ul > li > ul > li > ul > li > ul > li > a {
+  color: var(--d-text-3) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li > ul > li > ul > li > a:hover,
+body.dark-mode .sidebar-nav > ul > li > ul > li > ul > li > ul > li > a:hover {
+  color: var(--green-neon) !important;
+}
+
+/* TOC sub-items under active direct links — dark mode */
+body.dark-mode .sidebar-nav > ul > li > ul > li > ul > li > a {
+  color: var(--d-text-3) !important;
+}
+
+body.dark-mode .sidebar-nav > ul > li > ul > li > ul > li > a:hover {
+  color: var(--green-neon) !important;
+  background: var(--d-bg-3);
+}
+
+/* Sidebar toggle */
+body.dark-mode .sidebar-toggle {
+  background: var(--d-bg-2) !important;
+  border-color: var(--d-border) !important;
+}
+
+body.dark-mode .sidebar-toggle span { background: var(--green-neon) !important; }
+
+/* ── Main Content ─────────────────────────────────────────── */
+body.dark-mode .content    { background: var(--d-bg); }
+body.dark-mode .markdown-section { color: var(--d-text); }
+
+/* Headings — differentiated by color + accent bar */
+body.dark-mode .markdown-section h1 {
+  color: var(--green-neon) !important;
+  border-bottom-color: var(--green-neon);
+  border-left: none;
+  padding-left: 0;
+}
+
+body.dark-mode .markdown-section h2 {
+  color: var(--d-text) !important;    /* bright near-white — stands out */
+  border-bottom-color: var(--d-border);
+  border-left: 3px solid var(--d-h2); /* teal accent bar */
+  padding-left: 12px;
+}
+
+body.dark-mode .markdown-section h3 {
+  color: var(--d-h2);                 /* teal — clearly different from body */
+  border-left: 2px solid var(--d-h3);
+  padding-left: 10px;
+}
+
+body.dark-mode .markdown-section h4 {
+  color: var(--d-h3) !important;      /* light green */
+  border-left: none;
+  padding-left: 0;
+}
+
+body.dark-mode .markdown-section h5,
+body.dark-mode .markdown-section h6 {
+  color: var(--d-text-2) !important;
+  border-left: none;
+  padding-left: 0;
+}
+
+/* Body text */
+body.dark-mode .markdown-section p,
+body.dark-mode .markdown-section li {
+  color: var(--d-text);               /* #e6edf3 */
+}
+
+/* Strong / em — fix vue.css near-black override.
+   Dark mode rule has higher specificity (body.dark-mode adds one class),
+   so it overrides the light-mode !important rule. */
+body.dark-mode .markdown-section strong,
+body.dark-mode .markdown-section b {
+  color: #ffffff !important;          /* pure white — max contrast on dark bg */
+  font-weight: 700;
+}
+
+body.dark-mode .markdown-section em,
+body.dark-mode .markdown-section i {
+  color: var(--d-text-2);
+}
+
+/* Re-apply alert title colors that the strong override would hide */
+body.dark-mode .markdown-section blockquote.alert-note p:first-child strong {
+  color: var(--alert-note-border) !important;
+}
+body.dark-mode .markdown-section blockquote.alert-tip p:first-child strong {
+  color: var(--alert-tip-border) !important;
+}
+body.dark-mode .markdown-section blockquote.alert-warning p:first-child strong {
+  color: var(--alert-warning-border) !important;
+}
+body.dark-mode .markdown-section blockquote.alert-important p:first-child strong {
+  color: var(--alert-important-border) !important;
+}
+body.dark-mode .markdown-section blockquote.alert-caution p:first-child strong,
+body.dark-mode .markdown-section blockquote.alert-danger p:first-child strong {
+  color: var(--alert-danger-border) !important;
+}
+
+/* Links */
+body.dark-mode .markdown-section a { color: var(--green-neon); }
+body.dark-mode .markdown-section a:hover { color: var(--green-neon-2); }
+
+/* Inline code */
+body.dark-mode .markdown-section code {
+  background: var(--d-bg-3);
+  color: var(--green-neon);
+  border-color: var(--d-border);
+}
+
+/* Code blocks already dark, just adjust border */
+body.dark-mode .markdown-section pre {
+  border-left-color: var(--green-neon);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Tables — override vue.css zebra stripes that render as near-white on dark */
+body.dark-mode .markdown-section table { border-color: var(--d-border); }
+body.dark-mode .markdown-section thead { background: var(--d-bg-3) !important; }
+body.dark-mode .markdown-section th {
+  color: var(--d-text);
+  border-bottom-color: var(--d-border);
+}
+
+/* Force all rows to dark background — kills the white alternating rows */
+body.dark-mode .markdown-section tbody tr {
+  background-color: var(--d-bg) !important;
+}
+
+body.dark-mode .markdown-section tbody tr:nth-child(even) {
+  background-color: var(--d-bg-2) !important; /* subtle dark stripe only */
+}
+
+body.dark-mode .markdown-section td {
+  color: var(--d-text-2);
+  border-bottom-color: var(--d-border);
+  background-color: inherit !important;
+}
+
+body.dark-mode .markdown-section tbody tr:hover {
+  background-color: var(--d-bg-3) !important;
+}
+
+/* Blockquotes */
+body.dark-mode .markdown-section blockquote {
+  background: var(--d-bg-2);
+  color: var(--d-text-2);
+  border-left-color: var(--green-neon);
+}
+
+body.dark-mode .markdown-section blockquote strong { color: var(--green-neon); }
+
+/* Dark mode alert backgrounds */
+body.dark-mode .markdown-section blockquote.alert-note {
+  background: rgba(59, 130, 246, 0.1);
+}
+body.dark-mode .markdown-section blockquote.alert-tip {
+  background: rgba(0, 255, 136, 0.07);
+}
+body.dark-mode .markdown-section blockquote.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+}
+body.dark-mode .markdown-section blockquote.alert-important {
+  background: rgba(139, 92, 246, 0.1);
+}
+body.dark-mode .markdown-section blockquote.alert-caution,
+body.dark-mode .markdown-section blockquote.alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Copy button (no change needed, always green) */
+
+/* Theme toggle in dark mode */
+body.dark-mode .theme-toggle {
+  background: #fbbf24;
+  box-shadow: 0 2px 12px rgba(251, 191, 36, 0.35);
+}
+
+body.dark-mode .theme-toggle:hover {
+  background: #f59e0b;
+  box-shadow: 0 4px 18px rgba(251, 191, 36, 0.5);
+}
+
+body.dark-mode .theme-toggle svg { color: #0d1117; }
+
+/* Scrollbar */
+body.dark-mode ::-webkit-scrollbar-track { background: var(--d-bg-2); }
+body.dark-mode ::-webkit-scrollbar-thumb { background: var(--d-border); }
+body.dark-mode ::-webkit-scrollbar-thumb:hover { background: var(--green-neon); }
+
+/* Pagination */
+body.dark-mode .pagination-item a { color: var(--green-neon) !important; }
+
+/* Navbar */
+body.dark-mode .app-nav {
+  background: var(--d-bg-2);
+  border-bottom-color: var(--d-border);
+}
+
+body.dark-mode .app-nav a { color: var(--d-text-2); }
+body.dark-mode .app-nav a:hover { color: var(--green-neon); }
